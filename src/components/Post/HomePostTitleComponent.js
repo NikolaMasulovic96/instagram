@@ -22,7 +22,11 @@ class HomePostTitle extends Component {
               }}
             />
           </TouchableOpacity>
-          <Text style={styles.postText}>{"Amber Heard"}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("profile")}
+          >
+            <Text style={styles.postText}>{"Amber Heard"}</Text>
+          </TouchableOpacity>
         </View>
         <View style={{ alignItems: "center" }}>
           <Image

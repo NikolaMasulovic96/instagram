@@ -10,13 +10,25 @@ import {
 import { withNavigation } from "react-navigation";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AuthService from "../services/AuthService";
 
 class LoginScreen extends Component {
-  // static navigationOptions = {
-  //   title: "Home"
-  // };
+  state = {
+    username: "",
+    password: ""
+  };
 
+  onSubmitData = () => {
+    var user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    AuthService.login(user);
+    this.props.navigation.navigate("feed");
+  };
   render() {
+    const { username, password } = this.state;
     return (
       <ImageBackground
         source={{
@@ -30,14 +42,19 @@ class LoginScreen extends Component {
             containerStyle={styles.inputContainer}
             placeholder="USERNAME"
             leftIcon={<Icon active name="user" size={24} color="black" />}
+            onChangeText={username => this.setState({ username })}
+            value={username}
           />
           <Input
+            secureTextEntry
             containerStyle={styles.inputContainer}
             placeholder="PASSWORD"
             leftIcon={<Icon active name="lock" size={24} color="black" />}
+            onChangeText={password => this.setState({ password })}
+            value={password}
           />
           <Button
-            onPress={() => this.props.navigation.navigate("feed")}
+            onPress={() => this.onSubmitData()}
             title="Login"
             color="#FAEBD7"
           />

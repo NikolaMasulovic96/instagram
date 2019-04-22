@@ -10,6 +10,8 @@ import {
   ActivityIndicator
 } from "react-native";
 import { withNavigation } from "react-navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ProfileService from "../services/ProfileService";
 
 class ProfileScreen extends Component {
   constructor() {
@@ -40,6 +42,12 @@ class ProfileScreen extends Component {
       ]
     };
   }
+
+  onSubmitData = index => {
+    ProfileService.setCurrentImage(index);
+    this.props.navigation.navigate("oneSinglePhoto");
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -88,12 +96,14 @@ class ProfileScreen extends Component {
           data={this.state.dataSource}
           renderItem={({ item }) => (
             <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-              <Image
-                style={styles.imageThumbnail}
-                source={{
-                  uri: item
-                }}
-              />
+              <TouchableOpacity onPress={() => this.onSubmitData(item)}>
+                <Image
+                  style={styles.imageThumbnail}
+                  source={{
+                    uri: item
+                  }}
+                />
+              </TouchableOpacity>
             </View>
           )}
           //Setting the number of column

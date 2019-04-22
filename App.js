@@ -12,6 +12,7 @@ import CameraScreen from "./src/components/Screens/CameraScreen";
 import ProfileScreen from "./src/components/Screens/ProfileScreen";
 import RegisterScreen from "./src/components/Screens/RegisterScreen";
 import ChatScreen from "./src/components/Screens/ChatScreen";
+import OneSinglePhoto from "./src/components/profile/OneSinglePhoto";
 
 class App extends Component {
   static navigationOptions = {
@@ -41,7 +42,8 @@ const AppNavigator = createStackNavigator(
     register: { screen: RegisterScreen },
     camera: { screen: CameraScreen },
     profile: { screen: ProfileScreen },
-    chat: { screen: ChatScreen }
+    chat: { screen: ChatScreen },
+    oneSinglePhoto: { screen: OneSinglePhoto }
   },
   {
     mode: "modal",
