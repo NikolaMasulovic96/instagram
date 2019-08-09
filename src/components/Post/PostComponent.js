@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image } from "react-native";
 import HomePostTitle from "./HomePostTitleComponent";
 import CommandLine from "./CommandLineComponent";
 import CommentComponent from "./CommentComponent";

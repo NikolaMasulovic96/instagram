@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(FeedScreen);
+export default FeedScreen;

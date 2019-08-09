@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import InstaApp from "./src/InstaApp";
+import React from "react";
+import { Button, Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   createStackNavigator,
-  createAppContainer,
-  TabNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createAppContainer
 } from "react-navigation";
 import FeedScreen from "./src/components/Screens/FeedScreen";
 import CameraScreen from "./src/components/Screens/CameraScreen";
@@ -14,50 +13,78 @@ import RegisterScreen from "./src/components/Screens/RegisterScreen";
 import ChatScreen from "./src/components/Screens/ChatScreen";
 import OneSinglePhoto from "./src/components/profile/OneSinglePhoto";
 
-class App extends Component {
-  static navigationOptions = {
-    title: "App",
-    headerMode: "screen",
-    header: null
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <InstaApp />
-      </View>
-    );
-  }
-}
-
-// const Tabs = createBottomTabNavigator({
-//   feed: FeedScreen,
-//   camera: CameraScreen,
-//   profile: ProfileScreen
-// });
-
-const AppNavigator = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
-    Home: { screen: App },
-    feed: { screen: FeedScreen },
-    register: { screen: RegisterScreen },
-    camera: { screen: CameraScreen },
+    Home: { screen: FeedScreen },
     profile: { screen: ProfileScreen },
-    chat: { screen: ChatScreen },
-    oneSinglePhoto: { screen: OneSinglePhoto }
+    chat: { screen: ChatScreen }
   },
   {
-    mode: "modal",
-    headerMode: "screen"
+    defaultNavigationOptions: {
+      //Header customization of the perticular Screen
+      headerStyle: {
+        backgroundColor: "#42f44b"
+      },
+      headerTintColor: "#FFFFFF",
+      title: "Home"
+      //Header title
+    },
+    tabBarOptions: {
+      style: {
+        backgroundColor: "blue"
+      }
+    }
+  }
+);
+const SettingsStack = createStackNavigator(
+  {
+    //Defination of Navigaton from setting screen
+    Settings: { screen: CameraScreen }
+  },
+  {
+    //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
+    defaultNavigationOptions: {
+      //Header customization of the perticular Screen
+      headerStyle: {
+        backgroundColor: "#42f44b"
+      },
+      headerTintColor: "#FFFFFF",
+      title: "Settings"
+      //Header title
+    }
   }
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "black"
+const App = createBottomTabNavigator(
+  {
+    Home: { screen: HomeStack },
+    Settings: { screen: SettingsStack }
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
+        let iconName;
+        if (routeName === "Home") {
+          iconName = `ios-information-circle${focused ? "" : "-outline"}`;
+        } else if (routeName === "Settings") {
+          iconName = `ios-checkmark-circle${focused ? "" : "-outline"}`;
+        }
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: "#42f44b",
+      inactiveTintColor: "black",
+      style: {
+        backgroundColor: "red"
+      }
+    }
   }
-});
-
-export default createAppContainer(AppNavigator);
+);
+export default createAppContainer(App);
+// const styles = StyleSheet.create({
+//   tab: {
+//     backgroundColor: 'linear-gradient(to top, #003300 46%, #669999 100%)';
+// });

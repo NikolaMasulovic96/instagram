@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { withNavigation } from "react-navigation";
 
 class HomePostTitle extends Component {
   render() {
@@ -73,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(HomePostTitle);
+export default HomePostTitle;

@@ -3,17 +3,15 @@ import { View, FlatList, Button, Text, Image, StyleSheet } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Header from "../Post/HeaderComponent";
 import PostComponent from "../Post/PostComponent";
-import { HeaderBackButton, NavigationActions } from "react-navigation";
-import { withNavigation } from "react-navigation";
 import navigation from "react-navigation";
 import OneChatItem from "../Chat/OneChatItem";
 
 class ChatScreen extends Component {
-  static navigationOptions = {
-    title: "chats",
-    headerMode: "screen",
-    header: <Header />
-  };
+  // static navigationOptions = {
+  //   title: "chats",
+  //   headerMode: "screen",
+  //   header: <Header />
+  // };
 
   onPressLearnMore() {
     navigate("home");
@@ -70,4 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(ChatScreen);
+export default ChatScreen;
